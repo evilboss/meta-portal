@@ -6,5 +6,8 @@
   "repository": "git@github.com:evilboss/meta-portal.git",
   "author": "evilboss <jr.evilboss@gmail.com>",
   "license": "MIT",
-  "private": null
+  "private": null,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
