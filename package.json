@@ -1,0 +1,10 @@
+{
+  "name": "meta-movie-portal",
+  "version": "1.0.0",
+  "description": "mysql backend image server",
+  "main": "index.js",
+  "repository": "git@github.com:evilboss/meta-portal.git",
+  "author": "evilboss <jr.evilboss@gmail.com>",
+  "license": "MIT",
+  "private": null
+}
