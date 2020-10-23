@@ -7,7 +7,40 @@
   "author": "evilboss <jr.evilboss@gmail.com>",
   "license": "MIT",
   "private": null,
+  "scripts": {
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist",
+    "dev": "npm-run-all build server",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "transpile": "babel ./src --out-dir dist",
+    "clean": "rimraf dist-server",
+    "watch:dev": "nodemon",
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
   "dependencies": {
-    "express": "^4.17.1"
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2"
   }
 }
