@@ -8,7 +8,7 @@ export const Posters = sequelize.define('Posters', {
     photo: {
         type: Sequelize.STRING
     },
-    imdbID: {
+    movieId: {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false

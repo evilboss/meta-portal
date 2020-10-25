@@ -1,8 +1,8 @@
 import fetch from 'node-fetch';
 import {Posters} from '../models/';
 
-const create = (req, res) => {
-    Posters.create();
+const create = (poster) => {
+    Posters.create(poster);
 }
 const list = (req, res, next) => {
     Posters.findAll().then(Posters => res.json(Posters)).catch(e => console.error(e));

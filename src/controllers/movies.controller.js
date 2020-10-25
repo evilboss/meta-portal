@@ -1,6 +1,7 @@
 import forEP from 'foreach-promise';
-import {Movies} from '../models/';
+import {Movies, Posters, Searches} from '../models/';
 import {api} from "../utils/api";
+import Sequelize from "sequelize";
 
 const create = (req, res) => {
     const {search} = req.body;
@@ -24,10 +25,13 @@ const createMany = (movies) => {
         forEP(movies, (movie, index, array) => {
             return Movies.create(movie).then(
                 (result, err) => {
-                    console.log('looop', result._options.isNewRecord);
+                    if (movie.Poster !== 'N/A' && movie.Poster) {
+                        const poster = {photo: movie.Poster, movieId: result.id, imdbID: movie.imdbID};
+                        Posters.findOrCreate({where: poster}).catch((posterError) => console.error(posterError));
+                    }
+
                     if (result) {
                         if (result._options.isNewRecord) {
-                            console.log('going here');
                             movieLists.push(result);
 
                         }
@@ -46,7 +50,12 @@ const createMany = (movies) => {
 
 }
 const list = (req, res, next) => {
-    Movies.findAll().then(movies => res.json(movies)).catch(e => console.error(e));
+    Movies.findAll(
+        {
+            include: {
+                model: Posters
+            }
+        }).then(movies => res.json(movies)).catch(e => console.error(e));
 
 }
 const find = (req, res) => {
