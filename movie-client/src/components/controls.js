@@ -40,10 +40,15 @@ export const Controls = (props) => {
                     disabled={checkDisabled('Matrix')}>
                 Matrix
             </Button>
-            <Button type="primary" onClick={() => onTrigger('Matrix Reloaded')} loading={loading} ghost>
+            <Button type="primary"
+                    onClick={() => onTrigger('Matrix Reloaded')}
+                    disabled={checkDisabled('Matrix Reloaded')}
+                    loading={loading} ghost>
                 Matrix Reloaded
             </Button>
-            <Button type="primary" onClick={() => onTrigger('Matrix Revolutions')} loading={loading} danger>
+            <Button type="primary" onClick={() => onTrigger('Matrix Revolutions')}
+                    disabled={checkDisabled('Matrix Revolutions')}k
+                    loading={loading} danger>
                 Matrix Revolutions
             </Button>
         </Col>
