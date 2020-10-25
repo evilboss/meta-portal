@@ -9,10 +9,11 @@ export const Posters = sequelize.define('Posters', {
         type: Sequelize.STRING
     },
     movieId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         unique: true,
         allowNull: false
 
     },
+
 });
 

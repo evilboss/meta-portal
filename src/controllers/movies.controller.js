@@ -32,19 +32,20 @@ const createMany = (movies) => {
 
                     if (result) {
                         if (result._options.isNewRecord) {
-                            movieLists.push(result);
+                            movie.Posters = [{photo: (movie.Poster !== 'N/A' && movie.Poster) ? movie.Poster : null}]
+                            movieLists.push(movie);
 
                         }
                     }
                 }
             ).catch(e => {
                 console.error('fpe-Errorr', e);
+                movieLists.push({});
             })
         }).then(() => {
-            console.log('resolving', movieLists);
             resolve(movieLists)
         }).catch(error => {
-            console.error('here', error);
+
         });
     });
 

@@ -13,7 +13,7 @@ module.exports = {
             },
             imdbID: {
                 type: Sequelize.STRING,
-                allowNull: false,
+                allowNull: true,
                 foreignKey: true,
 
             },
