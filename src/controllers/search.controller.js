@@ -35,5 +35,11 @@ const upsertPage = (search, apiResult) => {
         }
     ));
 }
+const list = (req, res) => {
+    Searches.findAll().then(results => res.json(results)).catch(e => console.error(e));
 
-export const SearchesController = {getPageCount, upsertPage}
+}
+
+export const SearchesController = {
+    getPageCount, upsertPage, list
+};

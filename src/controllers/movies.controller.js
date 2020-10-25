@@ -5,6 +5,7 @@ import Sequelize from "sequelize";
 
 const create = (req, res) => {
     const {search} = req.body;
+    console.log('post create update', req.body)
     api.getMovies(search)
         .then(results => {
             const {Search} = results;
