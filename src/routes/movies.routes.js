@@ -1,12 +1,11 @@
 import express from 'express';
+import {MoviesController} from '../controllers/';
 
 const moviesRouter = express.Router();
 moviesRouter.route('/')
-    .get((req, res) => res.send('OK movies get'))
-    .post((req, res) => res.send('ok movies post'));
-moviesRouter.route('/:movieId').get((req, res) => {
-    res.send('MovieId')
-})
-
-
+    .get(MoviesController.list)
+    .post(MoviesController.create);
+moviesRouter.route('/:movieId')
+    .get(MoviesController.find);
+moviesRouter.param('movieId', MoviesController.load);
 export default moviesRouter;
