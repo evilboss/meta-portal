@@ -12,21 +12,11 @@ const doRequest = (path, requestOptions = {}) => {
     });
 }
 const getMovies = () => {
-    console.log('get movies');
-    /*  return new Promise((resolve, reject) => {
-          fetch(`${apiUrl}api/movies`)
-              .then(result => result.json()).then(data => {
-              console.log(data);
-              resolve(data);
-          })
-              .catch(e => {
-                  console.error('error', e);
-                  reject(e);
-              })
-      });*/
     return doRequest('api/movies');
 };
 const getSearches = () => {
+    console.log('get searches');
+
     return doRequest('api/searches');
 }
 const updateMovies = (search) => {

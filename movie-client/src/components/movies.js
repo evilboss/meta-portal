@@ -2,7 +2,6 @@ import {Tabs, Radio, Row, Col, Divider} from 'antd';
 import {Posters} from "./index";
 
 const {TabPane} = Tabs;
-
 export const Movies = (props) => {
     const {movies} = props;
     console.log(movies);
@@ -16,12 +15,14 @@ export const Movies = (props) => {
                         <>
 
                             <TabPane tab={`${movie.Title}`} key={index}>
-                                <p>Title: <b>{movie.Title}</b></p>
-                                <p>Year: <b>{movie.Year}</b></p>
-                                <p>ImdbId: <b>{movie.imdbID}</b></p>
-                                <p>Type: <b>{movie.Type}</b></p>
+                                <Col span={12}>
+                                    <p>Title: <b>{movie.Title}</b></p>
+                                    <p>Year: <b>{movie.Year}</b></p>
+                                    <p>ImdbId: <b>{movie.imdbID}</b></p>
+                                    <p>Type: <b>{movie.Type}</b></p>
+                                    <Posters posters={movie.Posters}/>
 
-                                <Posters posters={movie.Posters}/>
+                                </Col>
                             </TabPane>
                         </>
                     ))}

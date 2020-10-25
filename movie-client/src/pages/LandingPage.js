@@ -17,7 +17,7 @@ export const LandingPage = (props) => {
                     .then(searches => setSearchKeys(searches))
                     .then(() => api.getMovies()
                         .then(movies => setMovies(movies))
-                        .catch(e => console.error('godam',e)))
+                        .catch(e => console.error('godam', e)))
                     .catch(e => console.error(e))
                     .finally(() => setNotTriggered(false));
             }
@@ -28,8 +28,7 @@ export const LandingPage = (props) => {
 
     return (
         <AppLayout>
-            <Controls setMovies={setMovies} movies={movies}/>
+            <Controls setMovies={setMovies} movies={movies} searchKeys={searchKeys}/>
             <Movies movies={movies}/>
-            <Posters/>
         </AppLayout>)
 }
