@@ -15,7 +15,6 @@ const getMovies = () => {
     return doRequest('api/movies');
 };
 const getSearches = () => {
-    console.log('get searches');
 
     return doRequest('api/searches');
 }

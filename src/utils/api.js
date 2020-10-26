@@ -16,19 +16,26 @@ const getMovies = (search) => {
                 fetch(`${APIURL}?${searchParams}`,)
                     .then(result => result.json())
                     .then(data => {
-                        const {Search, Response} = data;
+
+                        const {Search, Response, Error} = data;
                         const apiStatus = (Response === "True");
                         const searchData = {
                             searchKey: search,
                             pageCount: (pageCount) ? pageCount : 0
                         }
-                        SearchesController.upsertPage(searchData, apiStatus).then(updateResult => {
-                            console.log(updateResult);
-                        });
-                        resolve({Search, Response});
+                        SearchesController.upsertPage(searchData, apiStatus)
+                            .then(updateResult => {
+                                if (apiStatus) {
+                                    resolve({Search, Response});
+
+                                } else {
+                                    reject({error: Error});
+                                }
+                            });
                     })
                     .catch((err) => reject(err));
             } else {
+                console.error('reject');
                 reject({error: 'No more data'});
             }
 

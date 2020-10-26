@@ -4,7 +4,6 @@ import {Posters} from "./index";
 const {TabPane} = Tabs;
 export const Movies = (props) => {
     const {movies} = props;
-    console.log(movies);
     return (
 
 

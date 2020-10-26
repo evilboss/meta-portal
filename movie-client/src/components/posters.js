@@ -4,11 +4,8 @@ const noPhoto = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_im
 
 export const Posters = (props) => {
     let {posters} = props;
-    console.log(posters);
     if (!posters || posters.length < 0) {
         posters = [{photo: noPhoto}];
-        console.log(posters);
-
     }
     return (<>
         {posters ? posters.map((poster, key) =>

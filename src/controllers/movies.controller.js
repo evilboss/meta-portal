@@ -5,23 +5,34 @@ import Sequelize from "sequelize";
 
 const create = (req, res) => {
     const {search} = req.body;
-    console.log('post create update', req.body)
-    api.getMovies(search)
-        .then(results => {
-            const {Search} = results;
-            if (Search) {
-                createMany(Search).then((newMovies) => {
-                    res.json(newMovies);
-                });
-            }
+    console.log('going to create');
+    Searches.findAll().then((searches) => {
+        api.getMovies(search)
+            .then(results => {
+                const {Search} = results;
+                if (Search) {
+                    createMany(Search).then((newMovies) => {
+                        const data = {newMovies, searches}
+                        res.json(data);
 
-        })
-        .catch(err => res.json(err));
+                    }).catch((e) => {
+                        console.error('happening here', e);
+                    });
+                }
+
+            })
+            .catch(err => {
+                const errorPayload = ({...err, searches});
+                res.json(errorPayload);
+            });
+
+
+    });
 
 }
 const createMany = (movies) => {
+    console.log('going to create many');
     const movieLists = [];
-
     return new Promise((resolve, reject) => {
         forEP(movies, (movie, index, array) => {
             return Movies.create(movie).then(
@@ -40,12 +51,13 @@ const createMany = (movies) => {
                     }
                 }
             ).catch(e => {
-                console.error('fpe-Errorr', e);
+                // console.error('fpe-Errorr', e);
                 movieLists.push({});
-            })
+            });
         }).then(() => {
             resolve(movieLists)
         }).catch(error => {
+            console.error('movielist check', error, movieLists);
 
         });
     });

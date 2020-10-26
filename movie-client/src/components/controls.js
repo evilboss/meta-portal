@@ -2,9 +2,9 @@ import {Button, Row, Col, message} from 'antd';
 import {api} from "../utils/api";
 import {useState} from "react";
 
-
+const buttonStyles = {margin: 5};
 export const Controls = (props) => {
-    const {movies, setMovies, searchKeys, setNotTriggered} = props;
+    const {movies, setMovies, searchKeys, setNotTriggered, setSearchKeys} = props;
     const [loading, setLoading] = useState(false);
     const comBineMovies = (newMovies) => {
         return [...movies, ...newMovies]
@@ -19,24 +19,34 @@ export const Controls = (props) => {
 
     }
     const onTrigger = (search) => {
-
         const found = searchKeys.find(({searchKey}) => searchKey === search);
-        console.log('found data', found);
-
         if (!found || found.apiStatus) {
             setLoading(true);
-            api.updateMovies(search).then(data => {
-                console.log(data);
-                message.success('Movie list updated');
-                if (Array.isArray(data)) {
-                    const newMovies = data.filter(value => Object.keys(value).length !== 0);
-                    //setMovies(comBineMovies(newMovies));
-                }
-            }).catch(e => console.error('some error', e)).finally(() => {
-                setLoading(false);
-                setNotTriggered(false);
-            });
+            api.updateMovies(search)
+                .then(data => {
+                    let {newMovies, searches, error} = data;
+                    if (newMovies) {
+                        newMovies = newMovies.filter(value => Object.keys(value).length !== 0);
+                        setMovies(comBineMovies(newMovies));
+                    }
 
+                    setSearchKeys(searches);
+                    return data;
+                })
+                .then((data) => {
+                    const {error} = data;
+                    setLoading(false);
+                    if (error) {
+                        message.warn(error);
+                    } else {
+                        message.success('Movie list updated');
+
+                    }
+                })
+                .catch(e => {
+                    setLoading(false);
+                    message.error(e.toString());
+                });
         }
     }
     return (<Row>
@@ -46,17 +56,21 @@ export const Controls = (props) => {
         <Col span={24}>
             <Button type="primary"
                     onClick={() => onTrigger('Matrix')}
+                    style={buttonStyles}
                     loading={loading}
                     disabled={checkDisabled('Matrix')}>
                 Matrix
             </Button>
             <Button type="primary"
                     onClick={() => onTrigger('Matrix Reloaded')}
+                    style={buttonStyles}
+
                     disabled={checkDisabled('Matrix Reloaded')}
                     loading={loading} ghost>
                 Matrix Reloaded
             </Button>
             <Button type="primary" onClick={() => onTrigger('Matrix Revolutions')}
+                    style={buttonStyles}
                     disabled={checkDisabled('Matrix Revolutions')} k
                     loading={loading} danger>
                 Matrix Revolutions
