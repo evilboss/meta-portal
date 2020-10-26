@@ -28,7 +28,7 @@ export const LandingPage = (props) => {
 
     return (
         <AppLayout>
-            <Controls setMovies={setMovies} movies={movies} searchKeys={searchKeys}/>
+            <Controls setMovies={setMovies} movies={movies} searchKeys={searchKeys} setNotTriggered={setNotTriggered}/>
             <Movies movies={movies}/>
         </AppLayout>)
 }
