@@ -28,12 +28,16 @@ export const LandingPage = (props) => {
 
     return (
         <AppLayout>
-            <Controls setMovies={setMovies}
-                      movies={movies}
-                      searchKeys={searchKeys}
-                      setNotTriggered={setNotTriggered}
-                      setSearchKeys={setSearchKeys}
-            />
-            <Movies movies={movies}/>
+            <div style={{height: '75vh'}}>
+                <Controls setMovies={setMovies}
+                          movies={movies}
+                          searchKeys={searchKeys}
+                          setNotTriggered={setNotTriggered}
+                          setSearchKeys={setSearchKeys}
+                />
+                <Movies movies={movies}/>
+
+            </div>
+
         </AppLayout>)
 }

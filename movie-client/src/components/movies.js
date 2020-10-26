@@ -9,7 +9,7 @@ export const Movies = (props) => {
 
         <Row>
             <Col span={24}>
-                <Tabs defaultActiveKey="1" tabPosition={'left'} style={{height: '80vh'}}>
+                <Tabs defaultActiveKey="1" tabPosition={'left'} style={{height: '50vh', overflowY: 'scroll'}}>
                     {movies.map((movie, index) => (
                         <>
 

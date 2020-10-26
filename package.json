@@ -13,7 +13,11 @@
     "build": "babel src -s -D -d dist --presets es2015,stage-0",
     "start": "node dist",
     "prestart": "npm run -s build",
-    "test": "eslint src"
+    "test": "eslint src",
+    "setup:db": "sequelize db:drop && sequelize db:create && sequelize db:migrate",
+    "setup:client": "cd movie-client && pwd&& echo Installing client dependencies && yarn && echo building client && yarn build",
+    "setup:done": "printenv",
+    "postinstall": "yarn setup:db && yarn setup:client && setup:done"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
