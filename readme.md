@@ -24,7 +24,7 @@ Supply the info on `.env` file
 ```
 cp .env.example .env
 ```  
-supply required info
+Supply required info
 also need to copy second `.env` file for the client
 
 ```
@@ -33,21 +33,22 @@ cp .env.example .env
 
 ```
 
-go back to the project root and install dependencies
+Go back to the project root and install dependencies
 
 ```
+cd ..
 pwd  
-# you should be in root ->./meta-movie-portal
-#Use yarn to install
+# You should be in root ->./meta-movie-portal
+# Use yarn to install
 yarn
-#wait for the installer to finish
+# Wait for the installer to finish
 
 ```
 
 ###Runnign the app
 ```
-#Use 
+# Use 
 yarn start:dev 
-#to run the app. You should navigate on your browser to localhost:[the port you have set in the .env file]
+# to run the app. You should navigate on your browser to localhost:[the port you have set in the .env file]
 ```
 
